@@ -9,7 +9,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        112,
+        -128,
         0
       ],
       "id": "976d11d2-dd71-4bdb-a640-964aa2daa2f5",
@@ -26,7 +26,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        624,
+        1152,
         0
       ],
       "id": "a892b8c7-7c46-4e58-b84f-ce1c1c8577c8",
@@ -43,24 +43,22 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE",
-          "mode": "list",
-          "cachedResultName": "주소록",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE/edit?usp=drivesdk"
+          "value": "https://docs.google.com/spreadsheets/d/15PSi6M5ssF-wcTMlC5ifEzl42g7iFld8CxvGtQasJdI/edit?usp=sharing",
+          "mode": "url"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "시트1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE/edit#gid=0"
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15PSi6M5ssF-wcTMlC5ifEzl42g7iFld8CxvGtQasJdI/edit#gid=0"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        400,
+        144,
         0
       ],
       "id": "fd137b84-d5d7-42c7-bb77-15c8f5d3f76c",
@@ -71,9 +69,166 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44037046-c6f5-4f04-8424-6358b18420d6",
+              "leftValue": "={{ $json.row_number }}",
+              "rightValue": "={{ $('Filter2').item.json.row_number }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "05cfab5c-083a-448e-bead-c574a95ea7f1",
+              "leftValue": "={{ $json['option gmail'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        0
+      ],
+      "id": "03312a7a-0631-4c90-8cd4-cfbb39081090",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "maxItems": 4
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        896,
+        0
+      ],
+      "id": "3444f629-1619-498f-8f5f-4988c762c03c",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c51d5e29-739c-4bb7-a113-8df2f5e3b778",
+              "leftValue": "={{ $json['이름'] }}",
+              "rightValue": "김수영",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        0
+      ],
+      "id": "771a81c5-0ba3-4dc9-be35-e2b9d072ab03",
+      "name": "Filter2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15PSi6M5ssF-wcTMlC5ifEzl42g7iFld8CxvGtQasJdI/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15PSi6M5ssF-wcTMlC5ifEzl42g7iFld8CxvGtQasJdI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        0
+      ],
+      "id": "94528356-9364-459b-9d71-ec328cc2b9da",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5WNV5ZQSf6bC6CzY",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "connection": "keep-alive",
+            "sec-ch-ua": "\"Microsoft Edge\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "referer": "http://127.0.0.1:5500/",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "ko,en;q=0.9,en-US;q=0.8",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BwTPWky9CWxIR8wOWYeiHeGoDGxGyHWeM%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19PBb2dPi%2FzZ0W%2B9noAcOgxPV51Jjuy64Y%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2B8Sa15zSmsYR%2F2y1cENdI0wnnaRk4hNwXPlYrBVwaKpRszaofW382a9Pc6YiLQwAN3mIM7pVQeXA%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2ByrqHKwX396goqIpxedsbQdLq63M5T3o%2FdS1mNpOSTc619TvwTvKOS1mG1K5J74g5Xoarj%2FamX3y%2F%2F7Y6K01muDQWX0W4WOzR04Q3M55toHEGNh4vshDNm%2FTk%2FTZOyMzPBvWKFWl9PvXnZPiOyUYIVSnChmx3NYu8%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19wRT1nyzocCDX4LHUsseNIQADwWvUOfM6nrKF4GK7sIzRiQo2edeFKWZZ%2B5vBhq4WGt6WljJMA0qWJ7GTvoKR1V5VL9eborT%2FmzE1JS13kS6aJVsrpgDv%2B5xllb0p3f3teiAZ%2F5mmFOhMmq9TmPZ4wAuxtK%2FaREAU%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FPZwoQzH19COz0xaFJnEHuEQlygAHoZmm%2BO41Zvpx6uAI%2FHnTL6uEBq%2FiuoqgSYeXNNjqeMlR0lgxDgZbzKQo5sH6ezTZLTO9750ckuCgAGtqcNm71roC3hwmSC9kIIjV%2FVYcVnbrAow%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%22ec7e1bad2a4740316718fbb463927cd141412489448ad9b99fad0b0a93a1c571%23d289916b-9570-4f2f-96a3-16f6c1116a47%22%2C%22%24sesid%22%3A%5B1762930410250%2C%22019a7699-5622-7396-ad4b-0ce258beac2f%22%2C1762926351901%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22http%3A%2F%2Flocalhost%3A5678%2Fsetup%22%7D%7D",
+            "if-none-match": "W/\"22-6OS7cK0FzqnV2NeDHdOSGS1bVUs\""
+          },
+          "params": {},
+          "query": {
+            "fname": "Lydia",
+            "lname": "Kim",
+            "subject": "Test ] 테스트 메일",
+            "content": "안녕하세요,\r\n테스트 메일 보냅니다.\r\n감사합니다."
+          },
+          "body": {},
+          "webhookUrl": "http://localhost:5678/webhook-test/63a131e8-e6da-4d53-861b-a6cb81b80de4",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
   "connections": {
     "Webhook": {
       "main": [
@@ -90,7 +245,51 @@
       "main": [
         [
           {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
             "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -102,7 +301,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "eb7439bb-761b-4f67-897d-64833edb0178",
+  "versionId": "5c215fa9-d4b2-47d5-bfbf-c63144410b51",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ec7e1bad2a4740316718fbb463927cd141412489448ad9b99fad0b0a93a1c571"
