@@ -1,0 +1,112 @@
+{
+  "name": "11_send_email_forms",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "63a131e8-e6da-4d53-861b-a6cb81b80de4",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        112,
+        0
+      ],
+      "id": "976d11d2-dd71-4bdb-a640-964aa2daa2f5",
+      "name": "Webhook",
+      "webhookId": "63a131e8-e6da-4d53-861b-a6cb81b80de4"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json['option gmail'] }}",
+        "subject": "={{ $('Webhook').item.json.query.subject }}",
+        "message": "={{ $('Webhook').item.json.query.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "a892b8c7-7c46-4e58-b84f-ce1c1c8577c8",
+      "name": "Send a message",
+      "webhookId": "589d2d33-6c3f-4ae9-a363-404b019b9c73",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xnBAAC9fWbP25Cug",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE",
+          "mode": "list",
+          "cachedResultName": "주소록",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "시트1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19FhfsSnKyF5kZnvkpbk5zTtvZJjiUfz98kIxi-VYXZE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        400,
+        0
+      ],
+      "id": "fd137b84-d5d7-42c7-bb77-15c8f5d3f76c",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5WNV5ZQSf6bC6CzY",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "eb7439bb-761b-4f67-897d-64833edb0178",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec7e1bad2a4740316718fbb463927cd141412489448ad9b99fad0b0a93a1c571"
+  },
+  "id": "WtUWKD9R136OH5Yw",
+  "tags": []
+}
